@@ -68,12 +68,13 @@ public class send extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_send, container, false);
         // Inflate the layout for this fragment
-        final EditText mail_id = (EditText) container.findViewById(R.id.mail_id);
-        final EditText subject = (EditText) container.findViewById(R.id.subject) ;
-        final EditText content = (EditText) container.findViewById(R.id.content) ;
+        final EditText mail_id = (EditText) v.findViewById(R.id.mail_id);
+        final EditText subject = (EditText) v.findViewById(R.id.subject) ;
+        final EditText content = (EditText) v.findViewById(R.id.content) ;
 
-        FloatingActionButton send_mail = container.findViewById(R.id.send_mail) ;
+        FloatingActionButton send_mail = v.findViewById(R.id.send_mail) ;
 
         send_mail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +88,7 @@ public class send extends Fragment {
                 startActivity(Intent.createChooser(send, "send mail using:"));
             }
         });
-        return inflater.inflate(R.layout.fragment_send, container, false);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

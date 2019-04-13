@@ -2,8 +2,12 @@ package com.example.assignment3.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.assignment3.R;
+
+import static android.Manifest.permission.CALL_PHONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,15 +69,30 @@ public class help extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Button call = getView().findViewById(R.id.call);
-        final Button start_chat = getView().findViewById(R.id.start_chat);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_help, container, false);
+        Button call = v.findViewById(R.id.call);
+        final Button start_chat = v.findViewById(R.id.start_chat);
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent call = new Intent(Intent.ACTION_CALL) ;
-                Uri number = Uri.parse("tel:9411775699");
-                call.setData(number) ;
-                startActivity(call);
+                if (ActivityCompat.checkSelfPermission(getContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+                    // Call another Phone
+                    Intent call = new Intent(Intent.ACTION_CALL) ;
+                    Uri number = Uri.parse("tel:9411775699");
+                    call.setData(number) ;
+                    startActivity(call);
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{CALL_PHONE}, REQUEST_CALL) ;
+                    }
+                }
             }
         });
         start_chat.setOnClickListener(new View.OnClickListener() {
@@ -79,14 +100,8 @@ public class help extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "No chat service registered ..so a demo toast", Toast.LENGTH_SHORT).show();
             }
-        });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_help, container, false);
+        }) ;
+        return v ;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -126,5 +141,22 @@ public class help extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CALL){
+            if (grantResults.length >0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                // We will make a call
+                Intent call = new Intent(Intent.ACTION_CALL)  ;
+                Uri number = Uri.parse("tel:9411775699") ;
+                call.setData(number) ;
+                startActivity(call);
+
+            }
+            else {
+                Toast.makeText(getContext(), "Please grant permissions", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
