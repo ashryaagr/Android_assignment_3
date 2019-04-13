@@ -9,5 +9,13 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="about">about_me_text</string>
+    <string name="about">
+        This app has following features :\n
+        1) Primary fragment \n
+        2) Help fragment with a call button\n
+        3) send fragment to send mail\n
+        4) contacts fragment\n
+        5) About fragment i.e. current one\n
+        6) some other features\n
+    </string>
 </resources>
