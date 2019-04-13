@@ -7,9 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.assignment3.R;
+import com.example.assignment3.adapters.ListViewAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -29,6 +33,9 @@ public class contact extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    ListView listView;
+    List<com.example.assignment3.models.contact> items ;
 
     public contact() {
         // Required empty public constructor
@@ -65,7 +72,24 @@ public class contact extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+
+       View v = inflater.inflate(R.layout.fragment_contact, container, false);
+        listView = v.findViewById(R.id.contacts) ;
+        items = new ArrayList<>() ;
+
+        com.example.assignment3.models.contact contact1 =
+                new com.example.assignment3.models.contact("1234567890", "a@gmail.com", "Mr. X") ;
+        com.example.assignment3.models.contact contact2 =
+                new com.example.assignment3.models.contact("9876543210", "b@gmail.com", "Mr. Y") ;
+        com.example.assignment3.models.contact contact3 =
+                new com.example.assignment3.models.contact("13579246790", "c@gmail.com", "Mr. Z") ;
+        items.add(contact1);
+        items.add(contact2) ;
+        items.add(contact3);
+
+        ListViewAdapter adapter = new ListViewAdapter(getActivity(), items);
+        listView.setAdapter(adapter);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

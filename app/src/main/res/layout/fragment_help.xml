@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.help">
+    tools:context=".fragments.help"
+    android:background="@color/colorPrimary">
 
 
     <Button
@@ -20,14 +21,14 @@
         android:text="Call Us"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.235" />
 
     <Button
         android:id="@+id/start_chat"
-        android:layout_width="103dp"
+        android:layout_width="153dp"
         android:layout_height="61dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -38,7 +39,8 @@
         android:text="Start Chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/call"
-        app:layout_constraintVertical_bias="0.462" />
+        app:layout_constraintVertical_bias="0.182" />
 </android.support.constraint.ConstraintLayout>
