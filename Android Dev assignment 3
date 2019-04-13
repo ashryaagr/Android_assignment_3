@@ -1,4 +1,3 @@
-
 Create an android app that has a navigation drawer.
 
 The Drawer will have a profile image and name holder at the top(similar to Gmail). The menu items(total 5) will be - Primary, Send, Contact, About, Help. The bottom will have copyright info showing that the app is the property of CSD Course.
