@@ -7,9 +7,11 @@
         android:title="Send"/>
     <item
         android:id="@+id/about"
-        android:title="About" />
+        android:title="About"
+        android:icon="@drawable/info" />
     <item
         android:id="@+id/help"
-        android:title="Help" />
+        android:title="Help"
+        android:icon="@drawable/help"/>
 
 </menu>
